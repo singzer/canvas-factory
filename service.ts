@@ -3,7 +3,7 @@ import { ImgBuilder } from "./img";
 import { pb } from "./proto/canvas";
 
 export const CanvasServiceImpl = {
-  GenImg: (
+  GenImg: async (
     call: grpc.ServerUnaryCall<pb.ImgRequest, pb.ImgResponse>,
     callback: grpc.sendUnaryData<pb.ImgResponse>
   ) => {
@@ -15,7 +15,7 @@ export const CanvasServiceImpl = {
         call.request?.type,
         call.request?.data
       );
-      const buffer = imgBuiler.GetPNGBuffer();
+      const buffer = await imgBuiler.GetPNGBuffer();
       callback(null, new pb.ImgResponse({ data: buffer }));
     } catch (err) {
       callback(err as grpc.ServerErrorResponse, null);

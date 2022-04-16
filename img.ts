@@ -1,3 +1,4 @@
+import axios from "axios";
 import createCanvas from "canvas";
 
 const WHITE = "#FFFFFF";
@@ -44,9 +45,8 @@ export class ImgBuilder {
     this.canvas = createCanvas.createCanvas(this.width, this.height);
   }
 
-  // 构建图像
-  build() {
-    this.refresh();
+  // 默认模板
+  private async defaultTemp() {
     const ctx = this.canvas.getContext("2d");
     const nowTime = new Date();
 
@@ -75,27 +75,111 @@ export class ImgBuilder {
     );
   }
 
+  // verse 模板
+  private async verseTemp() {
+    const ctx = this.canvas.getContext("2d");
+
+    ctx.fillStyle = WHITE;
+    ctx.fillRect(0, 0, this.width, this.height);
+    ctx.globalAlpha = 1;
+
+    const verse = await getVerse();
+
+    console.log(verse);
+
+    ctx.font = '22px "WenQuanYi Zen Hei Sharp"';
+    ctx.fillStyle = BLACK;
+    ctx.textAlign = "center";
+    ctx.fillText(
+      "< " + verse.data.origin.title + " >",
+      this.width / 2,
+      this.height / 4
+    );
+
+    ctx.font = '20px "WenQuanYi Zen Hei Sharp"';
+    ctx.fillStyle = RED;
+    ctx.textAlign = "center";
+    ctx.fillText(verse.data.content, this.width / 2, this.height / 2);
+
+    ctx.fillStyle = BLACK;
+    ctx.font = '20px "WenQuanYi Zen Hei Sharp"';
+    ctx.fillText(
+      verse.data.origin.author + " - " + verse.data.origin.dynasty,
+      this.width / 2,
+      this.height / 2 + this.height / 4
+    );
+  }
+
+  // 构建图像
+  async build() {
+    this.refresh();
+    switch (this.type) {
+      case "default":
+        await this.defaultTemp();
+        break;
+      case "verse":
+        await this.verseTemp();
+        break;
+      default:
+        await this.defaultTemp();
+        break;
+    }
+  }
+
   // 返回png图像流
-  GetPNGStream(): NodeJS.ReadableStream {
-    this.build();
+  async GetPNGStream(): Promise<NodeJS.ReadableStream> {
+    await this.build();
     return this.canvas.createPNGStream();
   }
 
   // 返回base64图像数据
-  GetPNGBase64(): string {
-    this.build();
+  async GetPNGBase64(): Promise<string> {
+    await this.build();
     return this.canvas.toDataURL("image/png");
   }
 
   // 返回Buffer图像数据
-  GetPNGBuffer(): Buffer {
-    this.build();
+  async GetPNGBuffer(): Promise<Buffer> {
+    await this.build();
     return this.canvas.toBuffer("image/png");
   }
 
   // 返回Raw图像数据
-  GetRawBuffer(): Buffer {
-    this.build();
+  async GetRawBuffer(): Promise<Buffer> {
+    await this.build();
     return this.canvas.toBuffer("raw");
   }
+}
+
+//
+export interface Origin {
+  title: string;
+  dynasty: string;
+  author: string;
+  content: string[];
+  translate?: any;
+}
+
+export interface Data {
+  id: string;
+  content: string;
+  popularity: number;
+  origin: Origin;
+  matchTags: string[];
+  recommendedReason: string;
+  cacheAt: Date;
+}
+
+export interface VerseResult {
+  status: string;
+  data: Data;
+  token: string;
+  ipAddress: string;
+  warning?: any;
+}
+
+// 每日一诗
+async function getVerse(): Promise<VerseResult> {
+  const res = await axios.get("https://v2.jinrishici.com/one.json");
+  return res.data;
 }
