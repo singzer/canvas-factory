@@ -6,252 +6,332 @@
 import * as pb_1 from "google-protobuf";
 import * as grpc_1 from "@grpc/grpc-js";
 export namespace pb {
-    export class ImgRequest extends pb_1.Message {
-        constructor(data?: any[] | {
+  export class ImgRequest extends pb_1.Message {
+    constructor(
+      data?:
+        | any[]
+        | {
             type?: string;
             data?: string;
             width?: number;
             height?: number;
-        }) {
-            super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
-            if (!Array.isArray(data) && typeof data == "object") {
-                if ("type" in data && data.type != undefined) {
-                    this.type = data.type;
-                }
-                if ("data" in data && data.data != undefined) {
-                    this.data = data.data;
-                }
-                if ("width" in data && data.width != undefined) {
-                    this.width = data.width;
-                }
-                if ("height" in data && data.height != undefined) {
-                    this.height = data.height;
-                }
-            }
+          }
+    ) {
+      super();
+      pb_1.Message.initialize(
+        this,
+        Array.isArray(data) ? data : [],
+        0,
+        -1,
+        [],
+        []
+      );
+      if (!Array.isArray(data) && typeof data == "object") {
+        if ("type" in data && data.type != undefined) {
+          this.type = data.type;
         }
-        get type() {
-            return pb_1.Message.getField(this, 1) as string;
+        if ("data" in data && data.data != undefined) {
+          this.data = data.data;
         }
-        set type(value: string) {
-            pb_1.Message.setField(this, 1, value);
+        if ("width" in data && data.width != undefined) {
+          this.width = data.width;
         }
-        get data() {
-            return pb_1.Message.getField(this, 2) as string;
+        if ("height" in data && data.height != undefined) {
+          this.height = data.height;
         }
-        set data(value: string) {
-            pb_1.Message.setField(this, 2, value);
-        }
-        get width() {
-            return pb_1.Message.getField(this, 3) as number;
-        }
-        set width(value: number) {
-            pb_1.Message.setField(this, 3, value);
-        }
-        get height() {
-            return pb_1.Message.getField(this, 4) as number;
-        }
-        set height(value: number) {
-            pb_1.Message.setField(this, 4, value);
-        }
-        static fromObject(data: {
-            type?: string;
-            data?: string;
-            width?: number;
-            height?: number;
-        }) {
-            const message = new ImgRequest({});
-            if (data.type != null) {
-                message.type = data.type;
-            }
-            if (data.data != null) {
-                message.data = data.data;
-            }
-            if (data.width != null) {
-                message.width = data.width;
-            }
-            if (data.height != null) {
-                message.height = data.height;
-            }
-            return message;
-        }
-        toObject() {
-            const data: {
-                type?: string;
-                data?: string;
-                width?: number;
-                height?: number;
-            } = {};
-            if (this.type != null) {
-                data.type = this.type;
-            }
-            if (this.data != null) {
-                data.data = this.data;
-            }
-            if (this.width != null) {
-                data.width = this.width;
-            }
-            if (this.height != null) {
-                data.height = this.height;
-            }
-            return data;
-        }
-        serialize(): Uint8Array;
-        serialize(w: pb_1.BinaryWriter): void;
-        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
-            const writer = w || new pb_1.BinaryWriter();
-            if (typeof this.type === "string" && this.type.length)
-                writer.writeString(1, this.type);
-            if (typeof this.data === "string" && this.data.length)
-                writer.writeString(2, this.data);
-            if (this.width !== undefined)
-                writer.writeInt32(3, this.width);
-            if (this.height !== undefined)
-                writer.writeInt32(4, this.height);
-            if (!w)
-                return writer.getResultBuffer();
-        }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ImgRequest {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ImgRequest();
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        message.type = reader.readString();
-                        break;
-                    case 2:
-                        message.data = reader.readString();
-                        break;
-                    case 3:
-                        message.width = reader.readInt32();
-                        break;
-                    case 4:
-                        message.height = reader.readInt32();
-                        break;
-                    default: reader.skipField();
-                }
-            }
-            return message;
-        }
-        serializeBinary(): Uint8Array {
-            return this.serialize();
-        }
-        static deserializeBinary(bytes: Uint8Array): ImgRequest {
-            return ImgRequest.deserialize(bytes);
-        }
+      }
     }
-    export class ImgResponse extends pb_1.Message {
-        constructor(data?: any[] | {
+    get type() {
+      return pb_1.Message.getField(this, 1) as string;
+    }
+    set type(value: string) {
+      pb_1.Message.setField(this, 1, value);
+    }
+    get data() {
+      return pb_1.Message.getField(this, 2) as string;
+    }
+    set data(value: string) {
+      pb_1.Message.setField(this, 2, value);
+    }
+    get width() {
+      return pb_1.Message.getField(this, 3) as number;
+    }
+    set width(value: number) {
+      pb_1.Message.setField(this, 3, value);
+    }
+    get height() {
+      return pb_1.Message.getField(this, 4) as number;
+    }
+    set height(value: number) {
+      pb_1.Message.setField(this, 4, value);
+    }
+    static fromObject(data: {
+      type?: string;
+      data?: string;
+      width?: number;
+      height?: number;
+    }) {
+      const message = new ImgRequest({});
+      if (data.type != null) {
+        message.type = data.type;
+      }
+      if (data.data != null) {
+        message.data = data.data;
+      }
+      if (data.width != null) {
+        message.width = data.width;
+      }
+      if (data.height != null) {
+        message.height = data.height;
+      }
+      return message;
+    }
+    toObject() {
+      const data: {
+        type?: string;
+        data?: string;
+        width?: number;
+        height?: number;
+      } = {};
+      if (this.type != null) {
+        data.type = this.type;
+      }
+      if (this.data != null) {
+        data.data = this.data;
+      }
+      if (this.width != null) {
+        data.width = this.width;
+      }
+      if (this.height != null) {
+        data.height = this.height;
+      }
+      return data;
+    }
+    serialize(): Uint8Array;
+    serialize(w: pb_1.BinaryWriter): void;
+    serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+      const writer = w || new pb_1.BinaryWriter();
+      if (typeof this.type === "string" && this.type.length)
+        writer.writeString(1, this.type);
+      if (typeof this.data === "string" && this.data.length)
+        writer.writeString(2, this.data);
+      if (this.width !== undefined) writer.writeInt32(3, this.width);
+      if (this.height !== undefined) writer.writeInt32(4, this.height);
+      if (!w) return writer.getResultBuffer();
+    }
+    static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ImgRequest {
+      const reader =
+          bytes instanceof pb_1.BinaryReader
+            ? bytes
+            : new pb_1.BinaryReader(bytes),
+        message = new ImgRequest();
+      while (reader.nextField()) {
+        if (reader.isEndGroup()) break;
+        switch (reader.getFieldNumber()) {
+          case 1:
+            message.type = reader.readString();
+            break;
+          case 2:
+            message.data = reader.readString();
+            break;
+          case 3:
+            message.width = reader.readInt32();
+            break;
+          case 4:
+            message.height = reader.readInt32();
+            break;
+          default:
+            reader.skipField();
+        }
+      }
+      return message;
+    }
+    serializeBinary(): Uint8Array {
+      return this.serialize();
+    }
+    static deserializeBinary(bytes: Uint8Array): ImgRequest {
+      return ImgRequest.deserialize(bytes);
+    }
+  }
+  export class ImgResponse extends pb_1.Message {
+    constructor(
+      data?:
+        | any[]
+        | {
             data?: Uint8Array;
-        }) {
-            super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
-            if (!Array.isArray(data) && typeof data == "object") {
-                if ("data" in data && data.data != undefined) {
-                    this.data = data.data;
-                }
-            }
+          }
+    ) {
+      super();
+      pb_1.Message.initialize(
+        this,
+        Array.isArray(data) ? data : [],
+        0,
+        -1,
+        [],
+        []
+      );
+      if (!Array.isArray(data) && typeof data == "object") {
+        if ("data" in data && data.data != undefined) {
+          this.data = data.data;
         }
-        get data() {
-            return pb_1.Message.getField(this, 1) as Uint8Array;
-        }
-        set data(value: Uint8Array) {
-            pb_1.Message.setField(this, 1, value);
-        }
-        static fromObject(data: {
-            data?: Uint8Array;
-        }) {
-            const message = new ImgResponse({});
-            if (data.data != null) {
-                message.data = data.data;
-            }
-            return message;
-        }
-        toObject() {
-            const data: {
-                data?: Uint8Array;
-            } = {};
-            if (this.data != null) {
-                data.data = this.data;
-            }
-            return data;
-        }
-        serialize(): Uint8Array;
-        serialize(w: pb_1.BinaryWriter): void;
-        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
-            const writer = w || new pb_1.BinaryWriter();
-            if (this.data !== undefined)
-                writer.writeBytes(1, this.data);
-            if (!w)
-                return writer.getResultBuffer();
-        }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ImgResponse {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ImgResponse();
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        message.data = reader.readBytes();
-                        break;
-                    default: reader.skipField();
-                }
-            }
-            return message;
-        }
-        serializeBinary(): Uint8Array {
-            return this.serialize();
-        }
-        static deserializeBinary(bytes: Uint8Array): ImgResponse {
-            return ImgResponse.deserialize(bytes);
-        }
+      }
     }
-    interface GrpcUnaryServiceInterface<P, R> {
-        (message: P, metadata: grpc_1.Metadata, options: grpc_1.CallOptions, callback: grpc_1.requestCallback<R>): grpc_1.ClientUnaryCall;
-        (message: P, metadata: grpc_1.Metadata, callback: grpc_1.requestCallback<R>): grpc_1.ClientUnaryCall;
-        (message: P, options: grpc_1.CallOptions, callback: grpc_1.requestCallback<R>): grpc_1.ClientUnaryCall;
-        (message: P, callback: grpc_1.requestCallback<R>): grpc_1.ClientUnaryCall;
+    get data() {
+      return pb_1.Message.getField(this, 1) as Uint8Array;
     }
-    interface GrpcStreamServiceInterface<P, R> {
-        (message: P, metadata: grpc_1.Metadata, options?: grpc_1.CallOptions): grpc_1.ClientReadableStream<R>;
-        (message: P, options?: grpc_1.CallOptions): grpc_1.ClientReadableStream<R>;
+    set data(value: Uint8Array) {
+      pb_1.Message.setField(this, 1, value);
     }
-    interface GrpWritableServiceInterface<P, R> {
-        (metadata: grpc_1.Metadata, options: grpc_1.CallOptions, callback: grpc_1.requestCallback<R>): grpc_1.ClientWritableStream<P>;
-        (metadata: grpc_1.Metadata, callback: grpc_1.requestCallback<R>): grpc_1.ClientWritableStream<P>;
-        (options: grpc_1.CallOptions, callback: grpc_1.requestCallback<R>): grpc_1.ClientWritableStream<P>;
-        (callback: grpc_1.requestCallback<R>): grpc_1.ClientWritableStream<P>;
+    static fromObject(data: { data?: Uint8Array }) {
+      const message = new ImgResponse({});
+      if (data.data != null) {
+        message.data = data.data;
+      }
+      return message;
     }
-    interface GrpcChunkServiceInterface<P, R> {
-        (metadata: grpc_1.Metadata, options?: grpc_1.CallOptions): grpc_1.ClientDuplexStream<P, R>;
-        (options?: grpc_1.CallOptions): grpc_1.ClientDuplexStream<P, R>;
+    toObject() {
+      const data: {
+        data?: Uint8Array;
+      } = {};
+      if (this.data != null) {
+        data.data = this.data;
+      }
+      return data;
     }
-    interface GrpcPromiseServiceInterface<P, R> {
-        (message: P, metadata: grpc_1.Metadata, options?: grpc_1.CallOptions): Promise<R>;
-        (message: P, options?: grpc_1.CallOptions): Promise<R>;
+    serialize(): Uint8Array;
+    serialize(w: pb_1.BinaryWriter): void;
+    serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+      const writer = w || new pb_1.BinaryWriter();
+      if (this.data !== undefined) writer.writeBytes(1, this.data);
+      if (!w) return writer.getResultBuffer();
     }
-    export abstract class UnimplementedCanvasService {
-        static definition = {
-            GenImg: {
-                path: "/pb.Canvas/GenImg",
-                requestStream: false,
-                responseStream: false,
-                requestSerialize: (message: ImgRequest) => Buffer.from(message.serialize()),
-                requestDeserialize: (bytes: Buffer) => ImgRequest.deserialize(new Uint8Array(bytes)),
-                responseSerialize: (message: ImgResponse) => Buffer.from(message.serialize()),
-                responseDeserialize: (bytes: Buffer) => ImgResponse.deserialize(new Uint8Array(bytes))
-            }
-        };
-        [method: string]: grpc_1.UntypedHandleCall;
-        abstract GenImg(call: grpc_1.ServerUnaryCall<ImgRequest, ImgResponse>, callback: grpc_1.sendUnaryData<ImgResponse>): void;
-    }
-    export class CanvasClient extends grpc_1.makeGenericClientConstructor(UnimplementedCanvasService.definition, "Canvas", {}) {
-        constructor(address: string, credentials: grpc_1.ChannelCredentials, options?: Partial<grpc_1.ChannelOptions>) {
-            super(address, credentials, options);
+    static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ImgResponse {
+      const reader =
+          bytes instanceof pb_1.BinaryReader
+            ? bytes
+            : new pb_1.BinaryReader(bytes),
+        message = new ImgResponse();
+      while (reader.nextField()) {
+        if (reader.isEndGroup()) break;
+        switch (reader.getFieldNumber()) {
+          case 1:
+            message.data = reader.readBytes();
+            break;
+          default:
+            reader.skipField();
         }
-        GenImg: GrpcUnaryServiceInterface<ImgRequest, ImgResponse> = (message: ImgRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<ImgResponse>, options?: grpc_1.CallOptions | grpc_1.requestCallback<ImgResponse>, callback?: grpc_1.requestCallback<ImgResponse>): grpc_1.ClientUnaryCall => {
-            return super.GenImg(message, metadata, options, callback);
-        };
+      }
+      return message;
     }
+    serializeBinary(): Uint8Array {
+      return this.serialize();
+    }
+    static deserializeBinary(bytes: Uint8Array): ImgResponse {
+      return ImgResponse.deserialize(bytes);
+    }
+  }
+  interface GrpcUnaryServiceInterface<P, R> {
+    (
+      message: P,
+      metadata: grpc_1.Metadata,
+      options: grpc_1.CallOptions,
+      callback: grpc_1.requestCallback<R>
+    ): grpc_1.ClientUnaryCall;
+    (
+      message: P,
+      metadata: grpc_1.Metadata,
+      callback: grpc_1.requestCallback<R>
+    ): grpc_1.ClientUnaryCall;
+    (
+      message: P,
+      options: grpc_1.CallOptions,
+      callback: grpc_1.requestCallback<R>
+    ): grpc_1.ClientUnaryCall;
+    (message: P, callback: grpc_1.requestCallback<R>): grpc_1.ClientUnaryCall;
+  }
+  interface GrpcStreamServiceInterface<P, R> {
+    (
+      message: P,
+      metadata: grpc_1.Metadata,
+      options?: grpc_1.CallOptions
+    ): grpc_1.ClientReadableStream<R>;
+    (message: P, options?: grpc_1.CallOptions): grpc_1.ClientReadableStream<R>;
+  }
+  interface GrpWritableServiceInterface<P, R> {
+    (
+      metadata: grpc_1.Metadata,
+      options: grpc_1.CallOptions,
+      callback: grpc_1.requestCallback<R>
+    ): grpc_1.ClientWritableStream<P>;
+    (
+      metadata: grpc_1.Metadata,
+      callback: grpc_1.requestCallback<R>
+    ): grpc_1.ClientWritableStream<P>;
+    (
+      options: grpc_1.CallOptions,
+      callback: grpc_1.requestCallback<R>
+    ): grpc_1.ClientWritableStream<P>;
+    (callback: grpc_1.requestCallback<R>): grpc_1.ClientWritableStream<P>;
+  }
+  interface GrpcChunkServiceInterface<P, R> {
+    (
+      metadata: grpc_1.Metadata,
+      options?: grpc_1.CallOptions
+    ): grpc_1.ClientDuplexStream<P, R>;
+    (options?: grpc_1.CallOptions): grpc_1.ClientDuplexStream<P, R>;
+  }
+  interface GrpcPromiseServiceInterface<P, R> {
+    (
+      message: P,
+      metadata: grpc_1.Metadata,
+      options?: grpc_1.CallOptions
+    ): Promise<R>;
+    (message: P, options?: grpc_1.CallOptions): Promise<R>;
+  }
+  export abstract class UnimplementedCanvasService {
+    static definition = {
+      GenImg: {
+        path: "/pb.Canvas/GenImg",
+        requestStream: false,
+        responseStream: false,
+        requestSerialize: (message: ImgRequest) =>
+          Buffer.from(message.serialize()),
+        requestDeserialize: (bytes: Buffer) =>
+          ImgRequest.deserialize(new Uint8Array(bytes)),
+        responseSerialize: (message: ImgResponse) =>
+          Buffer.from(message.serialize()),
+        responseDeserialize: (bytes: Buffer) =>
+          ImgResponse.deserialize(new Uint8Array(bytes)),
+      },
+    };
+    [method: string]: grpc_1.UntypedHandleCall;
+    abstract GenImg(
+      call: grpc_1.ServerUnaryCall<ImgRequest, ImgResponse>,
+      callback: grpc_1.sendUnaryData<ImgResponse>
+    ): void;
+  }
+  export class CanvasClient extends grpc_1.makeGenericClientConstructor(
+    UnimplementedCanvasService.definition,
+    "Canvas",
+    {}
+  ) {
+    constructor(
+      address: string,
+      credentials: grpc_1.ChannelCredentials,
+      options?: Partial<grpc_1.ChannelOptions>
+    ) {
+      super(address, credentials, options);
+    }
+    GenImg: GrpcUnaryServiceInterface<ImgRequest, ImgResponse> = (
+      message: ImgRequest,
+      metadata:
+        | grpc_1.Metadata
+        | grpc_1.CallOptions
+        | grpc_1.requestCallback<ImgResponse>,
+      options?: grpc_1.CallOptions | grpc_1.requestCallback<ImgResponse>,
+      callback?: grpc_1.requestCallback<ImgResponse>
+    ): grpc_1.ClientUnaryCall => {
+      return super.GenImg(message, metadata, options, callback);
+    };
+  }
 }

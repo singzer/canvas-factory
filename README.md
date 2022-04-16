@@ -4,6 +4,6 @@
 
 ## TODO
 
-[x] - 实现画布构造器
-[] - GRPC 传输 PNG bytes
-[] - 自定义模板
+[ x ] - 实现画布构造器
+[ ] - GRPC 传输 PNG bytes
+[ ] - 自定义模板
