@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package pb;
+
+message ImgRequest {
+  string type = 1; // 类型
+  string data = 2; // 补充数据
+  int32 high = 3;
+  int32 width = 4;
+}
+
+message ImgResponse {
+  bytes data = 1; // 图片数据
+}
+
+service Canvas { rpc GenImg(ImgRequest) returns (ImgResponse); }
