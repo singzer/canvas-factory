@@ -57,18 +57,22 @@ export class ImgBuilder {
     ctx.font = '20px "WenQuanYi Zen Hei Sharp"';
     ctx.fillStyle = BLACK;
     ctx.textAlign = "center";
-    ctx.fillText(nowTime.toLocaleString(), 200, 75);
+    ctx.fillText(nowTime.toLocaleString(), this.width / 2, this.height / 4);
 
-    ctx.fillText("2222", 200, 280);
+    ctx.fillText("2222", this.width / 2, this.height - this.height / 6);
 
     ctx.font = '40px "WenQuanYi Zen Hei Sharp"';
     ctx.fillStyle = RED;
     ctx.textAlign = "center";
-    ctx.fillText("阎奔创新劳模工作室", 200, 150);
+    ctx.fillText("阎奔创新劳模工作室", this.width / 2, this.height / 2);
 
     ctx.fillStyle = BLACK;
     ctx.font = '35px "WenQuanYi Zen Hei Sharp"';
-    ctx.fillText("智能会议系统", 200, 240);
+    ctx.fillText(
+      "智能会议系统",
+      this.width / 2,
+      this.height / 2 + this.height / 6
+    );
   }
 
   // 返回png图像流
