@@ -18,7 +18,7 @@ export const CanvasServiceImpl = {
       const buffer = imgBuiler.GetPNGBuffer();
       callback(null, new pb.ImgResponse({ data: buffer }));
     } catch (err) {
-      callback(err, null);
+      callback(err as grpc.ServerErrorResponse, null);
     }
   },
 };
