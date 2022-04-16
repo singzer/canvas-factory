@@ -17,8 +17,8 @@ export class ImgBuilder {
   constructor(width: number, height: number, type?: string, data?: string) {
     this.width = width;
     this.height = height;
-    this.type = type || "default";
-    this.data = data || "";
+    this.type = type ? type : "default";
+    this.data = data ? data : "";
     this.canvas = createCanvas.createCanvas(this.width, this.height);
   }
 
