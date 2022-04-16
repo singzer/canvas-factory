@@ -10,8 +10,8 @@ export namespace pb {
         constructor(data?: any[] | {
             type?: string;
             data?: string;
-            high?: number;
             width?: number;
+            height?: number;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
@@ -22,11 +22,11 @@ export namespace pb {
                 if ("data" in data && data.data != undefined) {
                     this.data = data.data;
                 }
-                if ("high" in data && data.high != undefined) {
-                    this.high = data.high;
-                }
                 if ("width" in data && data.width != undefined) {
                     this.width = data.width;
+                }
+                if ("height" in data && data.height != undefined) {
+                    this.height = data.height;
                 }
             }
         }
@@ -42,23 +42,23 @@ export namespace pb {
         set data(value: string) {
             pb_1.Message.setField(this, 2, value);
         }
-        get high() {
+        get width() {
             return pb_1.Message.getField(this, 3) as number;
         }
-        set high(value: number) {
+        set width(value: number) {
             pb_1.Message.setField(this, 3, value);
         }
-        get width() {
+        get height() {
             return pb_1.Message.getField(this, 4) as number;
         }
-        set width(value: number) {
+        set height(value: number) {
             pb_1.Message.setField(this, 4, value);
         }
         static fromObject(data: {
             type?: string;
             data?: string;
-            high?: number;
             width?: number;
+            height?: number;
         }) {
             const message = new ImgRequest({});
             if (data.type != null) {
@@ -67,11 +67,11 @@ export namespace pb {
             if (data.data != null) {
                 message.data = data.data;
             }
-            if (data.high != null) {
-                message.high = data.high;
-            }
             if (data.width != null) {
                 message.width = data.width;
+            }
+            if (data.height != null) {
+                message.height = data.height;
             }
             return message;
         }
@@ -79,8 +79,8 @@ export namespace pb {
             const data: {
                 type?: string;
                 data?: string;
-                high?: number;
                 width?: number;
+                height?: number;
             } = {};
             if (this.type != null) {
                 data.type = this.type;
@@ -88,11 +88,11 @@ export namespace pb {
             if (this.data != null) {
                 data.data = this.data;
             }
-            if (this.high != null) {
-                data.high = this.high;
-            }
             if (this.width != null) {
                 data.width = this.width;
+            }
+            if (this.height != null) {
+                data.height = this.height;
             }
             return data;
         }
@@ -104,10 +104,10 @@ export namespace pb {
                 writer.writeString(1, this.type);
             if (typeof this.data === "string" && this.data.length)
                 writer.writeString(2, this.data);
-            if (this.high !== undefined)
-                writer.writeInt32(3, this.high);
             if (this.width !== undefined)
-                writer.writeInt32(4, this.width);
+                writer.writeInt32(3, this.width);
+            if (this.height !== undefined)
+                writer.writeInt32(4, this.height);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -124,10 +124,10 @@ export namespace pb {
                         message.data = reader.readString();
                         break;
                     case 3:
-                        message.high = reader.readInt32();
+                        message.width = reader.readInt32();
                         break;
                     case 4:
-                        message.width = reader.readInt32();
+                        message.height = reader.readInt32();
                         break;
                     default: reader.skipField();
                 }

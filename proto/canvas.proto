@@ -5,8 +5,8 @@ package pb;
 message ImgRequest {
   string type = 1; // 类型
   string data = 2; // 补充数据
-  int32 high = 3;
-  int32 width = 4;
+  int32 width = 3;
+  int32 height = 4;
 }
 
 message ImgResponse {
