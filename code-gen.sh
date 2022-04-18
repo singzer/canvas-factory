@@ -2,4 +2,4 @@
 
 # Path: code-gen.sh
 
-protoc -I=./ --ts_out=./ proto/*.proto
+protoc -I=./ --ts_out=./ src/proto/*.proto

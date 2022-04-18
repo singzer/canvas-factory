@@ -1,6 +1,6 @@
 import * as grpc from "@grpc/grpc-js";
-import { ImgBuilder } from "./img";
-import { pb } from "./proto/canvas";
+import { ImgBuilder } from "../img/img";
+import { pb } from "../proto/canvas";
 
 export const CanvasServiceImpl = {
   GenImg: async (

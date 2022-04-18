@@ -1,5 +1,6 @@
-import axios from "axios";
 import createCanvas from "canvas";
+import { getVerse } from "./verse";
+import { parseCsvFile, Word } from "./word";
 
 const WHITE = "#FFFFFF";
 const RED = "#FF0000";
@@ -41,7 +42,7 @@ export class ImgBuilder {
   }
 
   // 刷新图像
-  refresh() {
+  private async refresh() {
     this.canvas = createCanvas.createCanvas(this.width, this.height);
   }
 
@@ -110,15 +111,53 @@ export class ImgBuilder {
     );
   }
 
+  // word 模板
+  private async wordTemp() {
+    const ctx = this.canvas.getContext("2d");
+
+    ctx.fillStyle = WHITE;
+    ctx.fillRect(0, 0, this.width, this.height);
+    ctx.globalAlpha = 1;
+
+    const WordList: Word[] = await parseCsvFile();
+
+    const randomWord = WordList[Math.floor(Math.random() * WordList.length)];
+
+    // ctx.font = '22px "WenQuanYi Zen Hei Sharp"';
+    // ctx.fillStyle = BLACK;
+    // ctx.textAlign = "center";
+    // ctx.fillText(randomWord.word, this.width / 2, this.height / 4);
+
+    ctx.font = '52px "WenQuanYi Zen Hei Sharp"';
+    ctx.fillStyle = RED;
+    ctx.textAlign = "center";
+    ctx.fillText(
+      randomWord.word,
+      this.width / 2,
+      this.height / 4 + this.height / 6
+    );
+
+    ctx.fillStyle = BLACK;
+    ctx.font = '18px "WenQuanYi Zen Hei Sharp"';
+    ctx.fillText(
+      randomWord.content,
+      this.width / 2,
+      this.height / 2 + this.height / 6
+    );
+  }
+
   // 构建图像
   async build() {
-    this.refresh();
+    await this.refresh();
     switch (this.type) {
       case "default":
         await this.defaultTemp();
         break;
       case "verse":
         await this.verseTemp();
+        break;
+      case "word":
+        await this.wordTemp();
         break;
       default:
         await this.defaultTemp();
@@ -149,37 +188,4 @@ export class ImgBuilder {
     await this.build();
     return this.canvas.toBuffer("raw");
   }
-}
-
-//
-export interface Origin {
-  title: string;
-  dynasty: string;
-  author: string;
-  content: string[];
-  translate?: any;
-}
-
-export interface Data {
-  id: string;
-  content: string;
-  popularity: number;
-  origin: Origin;
-  matchTags: string[];
-  recommendedReason: string;
-  cacheAt: Date;
-}
-
-export interface VerseResult {
-  status: string;
-  data: Data;
-  token: string;
-  ipAddress: string;
-  warning?: any;
-}
-
-// 每日一诗
-async function getVerse(): Promise<VerseResult> {
-  const res = await axios.get("https://v2.jinrishici.com/one.json");
-  return res.data;
 }

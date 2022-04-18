@@ -1,6 +1,6 @@
 import * as grpc from "@grpc/grpc-js";
 import { pb } from "./proto/canvas";
-import { CanvasServiceImpl } from "./service";
+import { CanvasServiceImpl } from "./service/service";
 
 const port = 9090;
 const host = "0.0.0.0";
