@@ -1,6 +1,6 @@
-import * as fs from "fs";
 import * as path from "path";
 import { parse } from "csv-parse";
+import * as fs from "graceful-fs";
 
 export type Word = {
   word: string;
