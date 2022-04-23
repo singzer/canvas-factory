@@ -17,7 +17,7 @@ export const CanvasServiceImpl = {
     );
 
     const buffer = imgBuiler.GetPNGBuffer();
-
+    // Canvas2Image.saveAsPNG(oCanvas);
     callback(null, new pb.ImgResponse({ data: buffer }));
   },
 };
