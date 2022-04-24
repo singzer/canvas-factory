@@ -87,10 +87,11 @@ export class ImgBuilder {
     // ctx.fillStyle = WHITE;
     // ctx.fillRect(0, 0, width, height); 384
     // ctx.globalAlpha = 1;     81 242 61
-    createCanvas.registerFont('./wqyfonts/fonts/WenQuanYiMicroHei.ttf', { family: 'WenQuanYi Micro Hei' });
+    // createCanvas.registerFont('./wqyfonts/fonts/WenQuanYiMicroHei.ttf', { family: 'WenQuanYi Micro Hei' });
     // 48
     // ctx.font = `${0.075 * this.width}px "WenQuanYi Zen Hei Sharp"`;
-    ctx.font = `${0.075 * this.width}px "WenQuanYi Micro Hei"`;
+    // ctx.font = `${0.075 * this.width}px "WenQuanYi Micro Hei"`;
+    ctx.font = `${0.075 * this.width}px "sans-serif"`;
     ctx.fillStyle = BLACK;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
@@ -99,14 +100,16 @@ export class ImgBuilder {
     // // ctx.fillText("2222", width / 2, height - height / 6);
 
     // ctx.font = `${0.225 * this.width}px "WenQuanYi Zen Hei Sharp"`;
-    ctx.font = `border ${0.225 * this.width}px "WenQuanYi Micro Hei"`;
+    // ctx.font = `border ${0.225 * this.width}px "WenQuanYi Micro Hei"`;
+    ctx.font = `${0.225 * this.width}px "sans-serif"`;
     ctx.fillStyle = WHITE;
     ctx.textAlign = "center";
     ctx.fillText("郑柯爽", this.width / 2, 0.447 * this.height);
     
     //30
     // ctx.font = `${0.05 * this.width}px "WenQuanYi Zen Hei Sharp"`;
-    ctx.font = `${0.05 * this.width}px "WenQuanYi Micro Hei"`;
+    // ctx.font = `${0.05 * this.width}px "WenQuanYi Micro Hei"`;
+    ctx.font = `${0.05 * this.width}px "sans-serif"`;
     ctx.fillStyle = WHITE;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
@@ -116,7 +119,8 @@ export class ImgBuilder {
     ctx.fillStyle = BLACK;
     //35
     // ctx.font = `${0.058 * this.width}px "WenQuanYi Zen Hei Sharp"`;
-    ctx.font = `${0.058 * this.width}px "WenQuanYi Micro Hei"`;
+    // ctx.font = `${0.058 * this.width}px "WenQuanYi Micro Hei"`;
+    ctx.font = `${0.058 * this.width}px "sans-serif"`;
     ctx.textAlign = "left";
     ctx.textBaseline = "middle";
     //height - (partBottom / 2)
@@ -124,7 +128,8 @@ export class ImgBuilder {
 
     // 25
     // ctx.font = `${0.039 * this.width}px "WenQuanYi Zen Hei Sharp"`;
-    ctx.font = `${0.039 * this.width}px "WenQuanYi Micro Hei"`;
+    // ctx.font = `${0.039 * this.width}px "WenQuanYi Micro Hei"`;
+    ctx.font = `${0.039 * this.width}px "sans-serif"`;
     ctx.textAlign = "left";
     ctx.textBaseline = 'middle';
     // width / 5 * 3 - 15    height - (partBottom / 4 * 3)
@@ -139,7 +144,8 @@ export class ImgBuilder {
 
     // 35
     // ctx.font = `${0.058 * this.width}px "WenQuanYi Zen Hei Sharp"`;
-    ctx.font = `${0.058 * this.width}px "WenQuanYi Micro Hei"`;
+    // ctx.font = `${0.058 * this.width}px "WenQuanYi Micro Hei"`;
+    ctx.font = `${0.058 * this.width}px "sans-serif"`;
     ctx.textBaseline = 'middle';
     ctx.textAlign = "left";
     //(width / 5 * 4) + 20          height - (partBottom / 2)

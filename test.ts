@@ -18,11 +18,12 @@ function main() {
     ctx.fillStyle = RED;
     ctx.fillRect(0, partTop, width, partCenter);
 
-    registerFont('./wqyfonts/fonts/WenQuanYiMicroHei.ttf', { family: 'WenQuanYi Micro Hei'});
+    // registerFont('./wqyfonts/fonts/WenQuanYiMicroHei.ttf', { family: 'WenQuanYi Micro Hei'});
 
     // 48
     // ctx.font = `${0.075 * width}px "WenQuanYi Zen Hei Sharp"`;
-    ctx.font = `${0.075 * width}px "WenQuanYi Micro Hei"`;
+    // ctx.font = `bold ${0.075 * width}px "WenQuanYi Micro Hei"`;
+    ctx.font = `bold ${0.075 * width}px "兰亭黑-简"`;
     ctx.fillStyle = BLACK;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
@@ -31,14 +32,16 @@ function main() {
     // // ctx.fillText("2222", width / 2, height - height / 6);
 
     // ctx.font = `${0.225 * width}px "WenQuanYi Zen Hei Sharp"`;
-    ctx.font = `${0.225 * width}px "WenQuanYi Micro Hei"`;
+    // ctx.font = `${0.225 * width}px "WenQuanYi Micro Hei"`;
+    ctx.font = `bold ${0.225 * width}px "sans-serif"`;
     ctx.fillStyle = WHITE;
     ctx.textAlign = "center";
     ctx.fillText("郑柯爽", width / 2, 0.447 * height);
     
     //30
     // ctx.font = `${0.05 * width}px "WenQuanYi Zen Hei Sharp"`;
-    ctx.font = `${0.05 * width}px "WenQuanYi Micro Hei"`;
+    // ctx.font = `${0.05 * width}px "WenQuanYi Micro Hei"`;
+    ctx.font = `${0.05 * width}px "sans-serif"`;
     ctx.fillStyle = WHITE;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
@@ -48,7 +51,8 @@ function main() {
     ctx.fillStyle = BLACK;
     //35
     // ctx.font = `${0.058 * width}px "WenQuanYi Zen Hei Sharp"`;
-    ctx.font = `${0.058 * width}px "WenQuanYi Micro Hei"`;
+    // ctx.font = `${0.058 * width}px "WenQuanYi Micro Hei"`;
+    ctx.font = `bold ${0.058 * width}px "sans-serif"`;
     ctx.textAlign = "left";
     ctx.textBaseline = "middle";
     //height - (partBottom / 2)
@@ -56,7 +60,8 @@ function main() {
 
     // 25
     // ctx.font = `${0.039 * width}px "WenQuanYi Zen Hei Sharp"`;
-    ctx.font = `${0.039 * width}px "WenQuanYi Micro Hei"`;
+    // ctx.font = `${0.039 * width}px "WenQuanYi Micro Hei"`;
+    ctx.font = `${0.039 * width}px "sans-serif"`;
     ctx.textAlign = "left";
     ctx.textBaseline = 'middle';
     // width / 5 * 3 - 15    height - (partBottom / 4 * 3)
@@ -71,7 +76,8 @@ function main() {
 
     // 35
     // ctx.font = `${0.058 * width}px "WenQuanYi Zen Hei Sharp"`;
-    ctx.font = `${0.058 * width}px "WenQuanYi Micro Hei"`;
+    // ctx.font = `${0.058 * width}px "WenQuanYi Micro Hei"`;
+    ctx.font = `bold ${0.058 * width}px "sans-serif"`;
     ctx.textBaseline = 'middle';
     ctx.textAlign = "left";
     //(width / 5 * 4) + 20          height - (partBottom / 2)
