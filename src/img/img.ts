@@ -227,7 +227,7 @@ export class HtmlBuilder extends ImgBuilder {
     body.css("width", `${this.width}px`);
     body.css("height", `${this.height}px`);
 
-    this.html = body.html();
+    this.html = body.html() as string;
   }
 
   // 构建图像
