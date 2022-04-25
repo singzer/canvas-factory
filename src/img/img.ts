@@ -1,26 +1,57 @@
 import createCanvas from "canvas";
+import nodeHtmlToImage from "node-html-to-image";
+
+// 导入 cheerio
+import cheerio from "cheerio";
 import { getVerse } from "./verse";
 import { parseCsvFile, Word } from "./word";
+import { htmlTempData } from "./html";
 
 const WHITE = "#FFFFFF";
 const RED = "#FF0000";
 const BLACK = "#000000";
 
-// 定义一个图像构造器实例
+// const CanvasTempList = ["default", "word", "verse"];
+export enum CanvasTemp {
+  default = "default",
+  word = "word",
+  verse = "verse",
+}
+
+export enum HtmlTemp {
+  hd = "hd",
+}
+
+// 图像构造器
 export class ImgBuilder {
   width: number;
   height: number;
 
   type: string;
   data: string;
+
+  constructor(width: number, height: number, type: string, data: string) {
+    this.width = width;
+    this.height = height;
+    this.type = type;
+    this.data = data;
+  }
+
+  // 空方法
+  async GetPNGBuffer(): Promise<Buffer> {
+    return new Promise((_, reject) => {
+      reject("Not implemented");
+    });
+  }
+}
+
+// 画布构造器
+export class CanvasBuilder extends ImgBuilder {
   canvas: createCanvas.Canvas;
 
   // 构造函数
-  constructor(width: number, height: number, type?: string, data?: string) {
-    this.width = width;
-    this.height = height;
-    this.type = type ? type : "default";
-    this.data = data ? data : "";
+  constructor(width: number, height: number, type: string, data: string) {
+    super(width, height, type, data);
     this.canvas = createCanvas.createCanvas(this.width, this.height);
   }
 
@@ -165,12 +196,6 @@ export class ImgBuilder {
     }
   }
 
-  // 返回png图像流
-  async GetPNGStream(): Promise<NodeJS.ReadableStream> {
-    await this.build();
-    return this.canvas.createPNGStream();
-  }
-
   // 返回base64图像数据
   async GetPNGBase64(): Promise<string> {
     await this.build();
@@ -182,10 +207,55 @@ export class ImgBuilder {
     await this.build();
     return this.canvas.toBuffer("image/png");
   }
+}
 
-  // 返回Raw图像数据
-  async GetRawBuffer(): Promise<Buffer> {
+export class HtmlBuilder extends ImgBuilder {
+  html: string;
+
+  // 构造函数
+  constructor(width: number, height: number, type: string, data: string) {
+    super(width, height, type, data);
+    this.html = "";
+  }
+
+  // HDHtml
+  async hdhtml() {
+    const htmlRoot = cheerio.load(htmlTempData.HDHtml);
+    //修改 style
+    const body = htmlRoot("body");
+
+    body.css("width", `${this.width}px`);
+    body.css("height", `${this.height}px`);
+
+    this.html = body.html();
+  }
+
+  // 构建图像
+  async build() {
+    switch (this.type) {
+      case "hd":
+        this.html = htmlTempData.HDHtml;
+        break;
+      default:
+        this.html = htmlTempData.HDHtml;
+        break;
+    }
+  }
+
+  async GetPNGBuffer(): Promise<Buffer> {
     await this.build();
-    return this.canvas.toBuffer("raw");
+
+    const htmlRoot = cheerio.load(this.html);
+    //修改 style
+    const body = htmlRoot("body");
+
+    body.css("width", `${this.width}px`);
+    body.css("height", `${this.height}px`);
+
+    const img = await nodeHtmlToImage({
+      html: htmlRoot.html(),
+    });
+
+    return img as Buffer;
   }
 }
