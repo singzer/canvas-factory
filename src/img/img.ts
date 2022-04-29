@@ -252,8 +252,14 @@ export class HtmlBuilder extends ImgBuilder {
     body.css("width", `${this.width}px`);
     body.css("height", `${this.height}px`);
 
+    console.log(Buffer.from(this.data, 'base64').toString('utf-8'))
+
+    const content: object = JSON.parse(Buffer.from(this.data, 'base64').toString('utf-8'))
+    console.log(content)
+
     const img = await nodeHtmlToImage({
       html: htmlRoot.html(),
+      content: content,
     });
 
     return img as Buffer;
