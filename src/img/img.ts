@@ -6,6 +6,8 @@ import cheerio from "cheerio";
 import { getVerse } from "./verse";
 import { parseCsvFile, Word } from "./word";
 import { htmlTempMap } from "./html";
+import * as fs from "graceful-fs";
+import path from "path";
 
 const WHITE = "#FFFFFF";
 const RED = "#FF0000";
@@ -221,11 +223,17 @@ export class HtmlBuilder extends ImgBuilder {
 
   // 构建图像
   async build() {
-    if (htmlTempMap.has(this.type)) {
-      this.html = htmlTempMap.get(this.type) as string
+    const csvHtmlPath = path.resolve(
+      __dirname,
+      `../../assets/html/${this.type}.html`
+    );
+
+    if (fs.existsSync(csvHtmlPath)) {
+      this.html = fs.readFileSync(csvHtmlPath, { encoding: "utf-8" });
     }
+
     else {
-      this.html = htmlTempMap.get("letter") as string
+      this.html = htmlTempMap.get("none") as string
     }
   }
 
