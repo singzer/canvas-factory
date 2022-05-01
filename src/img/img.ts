@@ -5,7 +5,7 @@ import nodeHtmlToImage from "node-html-to-image";
 import cheerio from "cheerio";
 import { getVerse } from "./verse";
 import { parseCsvFile, Word } from "./word";
-import { htmlTempData } from "./html";
+import { htmlTempMap } from "./html";
 
 const WHITE = "#FFFFFF";
 const RED = "#FF0000";
@@ -218,27 +218,14 @@ export class HtmlBuilder extends ImgBuilder {
     this.html = "";
   }
 
-  // HDHtml
-  async hdhtml() {
-    const htmlRoot = cheerio.load(htmlTempData.HDHtml);
-    //修改 style
-    const body = htmlRoot("body");
-
-    body.css("width", `${this.width}px`);
-    body.css("height", `${this.height}px`);
-
-    this.html = body.html() as string;
-  }
 
   // 构建图像
   async build() {
-    switch (this.type) {
-      case "hd":
-        this.html = htmlTempData.HDHtml;
-        break;
-      default:
-        this.html = htmlTempData.HDHtml;
-        break;
+    if (htmlTempMap.has(this.type)) {
+      this.html = htmlTempMap.get(this.type) as string
+    }
+    else {
+      this.html = htmlTempMap.get("letter") as string
     }
   }
 
@@ -252,16 +239,31 @@ export class HtmlBuilder extends ImgBuilder {
     body.css("width", `${this.width}px`);
     body.css("height", `${this.height}px`);
 
-    console.log(Buffer.from(this.data, 'base64').toString('utf-8'))
+    let img: Buffer;
 
-    const content: object = JSON.parse(Buffer.from(this.data, 'base64').toString('utf-8'))
-    console.log(content)
+    try {
 
-    const img = await nodeHtmlToImage({
+      console.log(Buffer.from(this.data, 'base64').toString('utf-8'))
+
+      const content: object = JSON.parse(Buffer.from(this.data, 'base64').toString('utf-8'))
+      console.log(content)
+
+      if (content) {
+        img = await nodeHtmlToImage({
+          html: htmlRoot.html(),
+          content: content,
+        }) as Buffer
+        return img;
+      }
+
+    } catch (error) {
+      console.log(error)
+    }
+
+    img = await nodeHtmlToImage({
       html: htmlRoot.html(),
-      content: content,
-    });
+    }) as Buffer
 
-    return img as Buffer;
+    return img;
   }
 }

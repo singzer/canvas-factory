@@ -1,4 +1,6 @@
-export namespace htmlTempData {
+namespace htmlTempData {
+
+
   export const HDHtml = `
   <!DOCTYPE html>
   <html lang="en">
@@ -117,7 +119,7 @@ export namespace htmlTempData {
         <div id="bottom-left">{{meetAdr}}</div>
         <div id="bottom-right">
           <div id="bottom-right-time">
-          {{startTime}}}<br />
+          {{startTime}}<br />
           {{endTime}}
           </div>
           <div id="bottom-right-ttt"></div>
@@ -132,4 +134,68 @@ export namespace htmlTempData {
     </body>
   </html>
     `;
+
+  export const LetterHtml = `
+    <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <style>
+          * {
+            padding: 0;
+            margin: 0;
+          }
+          body {
+            /* font-size: 62.5%; */
+            width: 640px;
+            height: 380px;
+            text-align: center;
+            word-wrap: break-word;
+            word-break: break-all;
+            /* font-size: 10px; */
+            position: relative;
+            color: white;
+          }
+        div{
+            width: 100%;
+            height: 100%;
+            background-color: red;
+        }
+
+        h1{
+              display: inline-block;
+              position: absolute;
+              width: 100%;
+              left: 50%;
+              top: 50%;
+              transform: translate(-50%, -50%);
+              /* height: 200px; */
+              font-size: 9em;
+          }
+        </style>
+  </head>
+  <body>
+      <div>
+          <h1 id="content">
+              {{text}}
+          </h1>
+      </div>
+  </body>
+  </html>
+`
 }
+
+export const htmlTempMap = new Map<string, string>(
+  [
+    ["letter", htmlTempData.LetterHtml],
+    ["hd", htmlTempData.HDHtml]
+  ]
+);
+
+
+
+
+
