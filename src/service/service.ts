@@ -10,7 +10,7 @@ export const CanvasServiceImpl = {
     console.log("new task received: ", call.request);
     try {
       // 判断图像宽高是否合法
-      if (call.request.width <= 0 || call.request.height <= 0) {
+      if (call.request.width <= 0 || call.request.height <= 0 || call.request.height >= 1000 || call.request.width >= 1000) {
         throw new Error("width or height is invalid");
       }
 
@@ -18,17 +18,17 @@ export const CanvasServiceImpl = {
       const imgBuiler =
         call.request.type in CanvasTemp
           ? new CanvasBuilder(
-              call.request.width,
-              call.request.height,
-              call.request?.type,
-              call.request?.data
-            )
+            call.request.width,
+            call.request.height,
+            call.request?.type,
+            call.request?.data
+          )
           : new HtmlBuilder(
-              call.request.width,
-              call.request.height,
-              call.request?.type,
-              call.request?.data
-            );
+            call.request.width,
+            call.request.height,
+            call.request?.type,
+            call.request?.data
+          );
 
       const buffer = await imgBuiler.GetPNGBuffer();
       callback(null, new pb.ImgResponse({ data: buffer }));

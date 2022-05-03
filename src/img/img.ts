@@ -251,9 +251,9 @@ export class HtmlBuilder extends ImgBuilder {
 
     try {
 
-      console.log(Buffer.from(this.data, 'base64').toString('utf-8'))
+      // console.log(Buffer.from(this.data, 'base64').toString('utf-8'))
 
-      const content: object = JSON.parse(Buffer.from(this.data, 'base64').toString('utf-8'))
+      const content: object = JSON.parse(decodeURIComponent(this.data))
       console.log(content)
 
       if (content) {
